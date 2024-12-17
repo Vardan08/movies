@@ -14,13 +14,14 @@
 
         <ImageView
             android:id="@+id/posterImageView"
+            android:contentDescription="@string/todo"
             android:src="@mipmap/ic_launcher"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
 
         <TextView
             android:id="@+id/titleTextView"
-            android:text="Title"
+            android:text="@string/title"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:layout_width="wrap_content"
@@ -28,29 +29,29 @@
 
         <TextView
             android:id="@+id/yearTextView"
-            android:text="Year"
+            android:text="@string/year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/imdbIdTextView"
-            android:text="imdbId"
+            android:id="@+id/typeTextView"
+            android:text="@string/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/directorTextView"
-            android:text="Director"
+            android:text="@string/director"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/plotTextView"
-            android:text="Plot"
+            android:text="@string/plot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/runtimeTextView"
-            android:text="Runtime"
+            android:text="@string/runtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

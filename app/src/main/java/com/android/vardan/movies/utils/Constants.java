@@ -7,4 +7,5 @@ public class Constants {
     public static final String KEY_DIRECTOR = "director";
     public static final String KEY_PLOT = "plot";
     public static final String KEY_RUNTIME = "runtime";
+    public static final String KEY_TYPE = "type";
 }

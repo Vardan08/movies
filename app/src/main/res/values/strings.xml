@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Movies</string>
+    <string name="title">Title</string>
+    <string name="year">Year</string>
+    <string name="type">Type</string>
+    <string name="plot">Plot</string>
+    <string name="director">Director</string>
+    <string name="runtime">Runtime</string>
+    <string name="todo">TODO</string>
 </resources>
