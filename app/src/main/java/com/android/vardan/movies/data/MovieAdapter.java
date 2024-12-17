@@ -1,5 +1,6 @@
 package com.android.vardan.movies.data;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -17,8 +18,8 @@ import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    private Context context;
-    private ArrayList<Movie> movies;
+    private final Context context;
+    private final ArrayList<Movie> movies;
     private OnItemClickListener listener;
 
     public interface OnItemClickListener {
@@ -44,6 +45,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return new MovieViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
         Movie currentMovie = movies.get(i);
@@ -51,9 +53,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         String title = currentMovie.getTitle();
         String year = currentMovie.getYear();
         String posterUrl = currentMovie.getPosterUrl();
-
-        movieViewHolder.titleTextView.setText(title);
-        movieViewHolder.yearTextView.setText(year);
+        String director = currentMovie.getDirector();
+        String plot = currentMovie.getPlot();
+        String runtime = currentMovie.getRuntime();
+        String type = currentMovie.getType();
+        movieViewHolder.titleTextView.setText("Title: " + title);
+        movieViewHolder.yearTextView.setText("Year: " + year);
+        movieViewHolder.directorTextView.setText("Director: " + director);
+        movieViewHolder.plotTextView.setText("Plot: " + plot);
+        movieViewHolder.runTimeTextView.setText("Runtime: " + runtime);
+        movieViewHolder.typeTextView.setText("type: " + type);
         Picasso.get().load(posterUrl).fit().centerInside()
                 .into(movieViewHolder.posterImageView);
     }
@@ -68,6 +77,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         ImageView posterImageView;
         TextView titleTextView;
         TextView yearTextView;
+        TextView directorTextView;
+        TextView plotTextView;
+        TextView runTimeTextView;
+        TextView typeTextView;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,15 +88,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             posterImageView = itemView.findViewById(R.id.posterImageView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             yearTextView = itemView.findViewById(R.id.yearTextView);
+            directorTextView = itemView.findViewById(R.id.directorTextView);
+            plotTextView = itemView.findViewById(R.id.plotTextView);
+            runTimeTextView = itemView.findViewById(R.id.runtimeTextView);
+            typeTextView = itemView.findViewById(R.id.typeTextView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(position);
                     }
                 }
             });

@@ -8,9 +8,17 @@ public class Movie {
     private String director;
     private String plot;
     private String runtime;
+    private String type;
 
-    public Movie() {
+    public String getType() {
+        return type;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Movie() {}
 
     public String getTitle() {
         return title;
@@ -59,4 +67,5 @@ public class Movie {
     public void setRuntime(String runtime) {
         this.runtime = runtime;
     }
+
 }
