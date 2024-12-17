@@ -1,4 +1,4 @@
-package com.android.uraall.movies.model;
+package com.android.vardan.movies.model;
 
 
 public class Movie {

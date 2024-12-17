@@ -1,10 +1,10 @@
-package com.android.uraall.movies.activities;
+package com.android.vardan.movies.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.android.uraall.movies.R;
+import com.android.vardan.movies.R;
 
 
 public class DetailActivity extends AppCompatActivity {

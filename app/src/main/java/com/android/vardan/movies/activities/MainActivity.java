@@ -1,15 +1,14 @@
-package com.android.uraall.movies.activities;
+package com.android.vardan.movies.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
-import com.android.uraall.movies.R;
-import com.android.uraall.movies.data.MovieAdapter;
-import com.android.uraall.movies.model.Movie;
+import com.android.vardan.movies.R;
+import com.android.vardan.movies.data.MovieAdapter;
+import com.android.vardan.movies.model.Movie;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,14 +22,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.OnItemClickListener {
+import com.android.vardan.movies.utils.Constants;
 
-    public static final String KEY_TITLE = "title";
-    public static final String KEY_POSTER_URL = "posterUrl";
-    public static final String KEY_YEAR = "year";
-    public static final String KEY_DIRECTOR = "director";
-    public static final String KEY_PLOT = "plot";
-    public static final String KEY_RUNTIME = "runtime";
+public class MainActivity extends AppCompatActivity implements MovieAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
@@ -48,13 +42,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
 
         movies = new ArrayList<>();
         requestQueue = Volley.newRequestQueue(this);
-        
+
         getMovies();
     }
 
     private void getMovies() {
 
-        String url = "http://www.omdbapi.com/?apikey=3b8a83ef&s=superman";
+        String url = "https://www.omdbapi.com/?apikey=7fd21c39&s=supermen";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
                 url, null, new Response.Listener<JSONObject>() {
@@ -105,12 +99,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
                 DetailActivity.class);
         Movie clickedMovie = movies.get(position);
 
-        intent.putExtra(KEY_TITLE, clickedMovie.getTitle());
-        intent.putExtra(KEY_POSTER_URL, clickedMovie.getPosterUrl());
-        intent.putExtra(KEY_YEAR, clickedMovie.getYear());
-        intent.putExtra(KEY_DIRECTOR, clickedMovie.getDirector());
-        intent.putExtra(KEY_PLOT, clickedMovie.getPlot());
-        intent.putExtra(KEY_RUNTIME, clickedMovie.getRuntime());
+        intent.putExtra(Constants.KEY_TITLE, clickedMovie.getTitle());
+        intent.putExtra(Constants.KEY_POSTER_URL, clickedMovie.getPosterUrl());
+        intent.putExtra(Constants.KEY_YEAR, clickedMovie.getYear());
+        intent.putExtra(Constants.KEY_DIRECTOR, clickedMovie.getDirector());
+        intent.putExtra(Constants.KEY_PLOT, clickedMovie.getPlot());
+        intent.putExtra(Constants.KEY_RUNTIME, clickedMovie.getRuntime());
 
 
         startActivity(intent);

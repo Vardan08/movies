@@ -1,4 +1,4 @@
-package com.android.uraall.movies.data;
+package com.android.vardan.movies.data;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.uraall.movies.R;
-import com.android.uraall.movies.model.Movie;
+import com.android.vardan.movies.R;
+import com.android.vardan.movies.model.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

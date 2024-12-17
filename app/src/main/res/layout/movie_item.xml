@@ -38,6 +38,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/directorTextView"
+            android:text="Director"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/plotTextView"
+            android:text="Plot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/runtimeTextView"
+            android:text="Runtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </android.support.v7.widget.CardView>
