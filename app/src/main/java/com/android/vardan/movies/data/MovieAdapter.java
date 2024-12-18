@@ -57,7 +57,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         String plot = currentMovie.getPlot();
         String runtime = currentMovie.getRuntime();
         String type = currentMovie.getType();
-        movieViewHolder.titleTextView.setText("Title: " + title);
+        movieViewHolder.titleTextView.setText(title);
         movieViewHolder.yearTextView.setText("Year: " + year);
         movieViewHolder.directorTextView.setText("Director: " + director);
         movieViewHolder.plotTextView.setText("Plot: " + plot);
