@@ -19,8 +19,9 @@ import java.util.ArrayList;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private final Context context;
-    private final ArrayList<Movie> movies;
+    private ArrayList<Movie> movies;
     private OnItemClickListener listener;
+    private final ArrayList<Movie> originalMovies; // Store the original list for search functionality
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -33,15 +34,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public MovieAdapter(Context context, ArrayList<Movie> movies) {
         this.context = context;
         this.movies = movies;
+        this.originalMovies = new ArrayList<>(movies);
     }
 
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
-        View view = LayoutInflater.from(context).inflate(R.layout.movie_item,
-                viewGroup, false);
-
+        View view = LayoutInflater.from(context).inflate(R.layout.movie_item, viewGroup, false);
         return new MovieViewHolder(view);
     }
 
@@ -57,12 +56,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         String plot = currentMovie.getPlot();
         String runtime = currentMovie.getRuntime();
         String type = currentMovie.getType();
+
         movieViewHolder.titleTextView.setText(title);
         movieViewHolder.yearTextView.setText("Year: " + year);
         movieViewHolder.directorTextView.setText("Director: " + director);
         movieViewHolder.plotTextView.setText("Plot: " + plot);
         movieViewHolder.runTimeTextView.setText("Runtime: " + runtime);
-        movieViewHolder.typeTextView.setText("type: " + type);
+        movieViewHolder.typeTextView.setText("Type: " + type);
         Picasso.get().load(posterUrl).fit().centerInside()
                 .into(movieViewHolder.posterImageView);
     }
@@ -71,6 +71,23 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public int getItemCount() {
         return movies.size();
     }
+
+    // Add the method to filter the movie list based on a search query
+    @SuppressLint("NotifyDataSetChanged")
+    public void filterMovies(String query) {
+        ArrayList<Movie> filteredMovies = new ArrayList<>();
+
+        for (Movie movie : originalMovies) {
+            if (movie.getTitle().toLowerCase().contains(query.toLowerCase())) {
+                filteredMovies.add(movie);
+            }
+        }
+
+        movies.clear();
+        movies.addAll(filteredMovies);
+        notifyDataSetChanged();
+    }
+
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
@@ -103,5 +120,4 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             });
         }
     }
-
 }
