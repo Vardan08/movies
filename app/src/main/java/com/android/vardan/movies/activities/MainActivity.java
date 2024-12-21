@@ -1,6 +1,7 @@
 package com.android.vardan.movies.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -121,23 +123,60 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
         MenuItem searchItem = menu.findItem(R.id.actionSearch);
         SearchView searchView = (SearchView) searchItem.getActionView();
 
-        searchView.setIconifiedByDefault(false); // Always show search input
+        searchView.setIconifiedByDefault(false); // Ensure search field is always visible
         searchView.setQueryHint("Search movies...");
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        // Listener to handle search item expand
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
-            public boolean onQueryTextSubmit(String newText) {
-                return false;
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                openKeyboardExplicitly(searchView); // Force open the keyboard
+                return true; // Allow expansion
             }
 
             @Override
-            public boolean onQueryTextChange(String query) {
-                // Optional: Implement live filtering here if needed
-                searchMovies(query);
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                closeKeyboard(); // Close the keyboard when search view collapses
+                return true; // Allow collapse
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchMovies(query); // Perform the search
+                closeKeyboard(); // Close the keyboard after the search
                 return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
 
         return true;
     }
+
+    // Method to close the keyboard
+    private void closeKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        View currentFocus = getCurrentFocus();
+        if (imm != null && currentFocus != null) {
+            imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+        }
+    }
+
+
+    private void openKeyboardExplicitly(View view) {
+        view.requestFocus(); // Request focus on the view
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0); // Force open the keyboard
+        }
+    }
+
+
+
+
 }
